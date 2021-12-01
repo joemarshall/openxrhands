@@ -344,7 +344,7 @@ public class HandTrackingFeature : OpenXRFeature
     public void GetHandJoints(Hand_Index hand,out Vector3[] positions, out Quaternion[] orientations, out float[] radius)
     {
         ulong handle=0;
-        if(hand!=Hand_Index.L)
+        if(hand==Hand_Index.L)
         {
             handle=handle_left;
         }else

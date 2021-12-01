@@ -21,7 +21,7 @@ public class HandGetter : MonoBehaviour
         HandTrackingFeature hf=OpenXRSettings.Instance.GetFeature<HandTrackingFeature>();
         if(hf==null)
         {
-            print("You need to enable the openXR hand tracking support extension ")
+            print("You need to enable the openXR hand tracking support extension ");
         }
         
         if(lhand==null)
