@@ -1,0 +1,173 @@
+{
+    "m_SelectedDeviceId": "1PASH9A1KX9127",
+    "m_SelectedPackage": {
+        "deviceId": "1PASH9A1KX9127",
+        "name": "com.JoeMarshall.xrhands",
+        "processId": 13031,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 7711,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 8209,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 8566,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 8739,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 8923,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 9079,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 9285,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 9468,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 9730,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 10373,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 10617,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 10950,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 11111,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 11698,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 12105,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 12375,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 12641,
+            "exited": false
+        },
+        {
+            "deviceId": "1PASH9A1KX9127",
+            "name": "com.JoeMarshall.xrhands",
+            "processId": 13031,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_Filter": "",
+    "m_FilterIsRegularExpression": false,
+    "m_SymbolPaths": []
+}

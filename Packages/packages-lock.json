@@ -1,14 +1,5 @@
 {
   "dependencies": {
-    "com.microsoft.mixedreality.openxr": {
-      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.1.2.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {
-        "com.unity.xr.openxr": "1.2.8",
-        "com.unity.xr.arfoundation": "4.1.7"
-      }
-    },
     "com.unity.collab-proxy": {
       "version": "1.13.5",
       "depth": 0,
@@ -58,6 +49,13 @@
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mobile.android-logcat": {
+      "version": "1.2.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
@@ -136,26 +134,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.xr.arfoundation": {
-      "version": "4.2.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.xr.arsubsystems": "4.2.0",
-        "com.unity.xr.management": "4.0.1"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.xr.arsubsystems": {
-      "version": "4.2.0",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.subsystemregistration": "1.1.0",
-        "com.unity.xr.management": "4.0.1"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.8",
       "depth": 1,
@@ -176,16 +154,6 @@
         "com.unity.modules.xr": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7",
         "com.unity.subsystemregistration": "1.0.6"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.xr.oculus": {
-      "version": "1.10.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.xr.management": "4.0.1",
-        "com.unity.ugui": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },

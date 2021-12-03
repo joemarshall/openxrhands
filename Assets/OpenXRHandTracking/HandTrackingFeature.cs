@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.XR.OpenXR.Features;
+using UnityEngine.XR.OpenXR;
 using UnityEngine;
 using UnityEditor;
 using System.Runtime.InteropServices;
 using System;
-
+using AOT;
 
 
 
@@ -21,6 +22,17 @@ using System;
 #endif
 public class HandTrackingFeature : OpenXRFeature
 {
+    static HandTrackingFeature m_Singleton;
+
+    public HandTrackingFeature()
+    {
+        m_Singleton=this;
+    }
+
+    ~HandTrackingFeature()
+    {
+        m_Singleton=null;
+    }
     Vector3 PosToUnity(XrVector3f pos)
     {
         return new Vector3(pos.x,pos.y,-pos.z);
@@ -69,7 +81,7 @@ public class HandTrackingFeature : OpenXRFeature
         XrHandTrackerEXT                            handTracker,
         const XrHandJointsLocateInfoEXT*            locateInfo,
         XrHandJointLocationsEXT*                    locations);*/
-    internal delegate int Type_xrLocateHandJointsEXT(ulong tracker, in XrHandJointsLocateInfoEXT locateInfoEXT, [In, Out] XrHandJointLocationsEXT locations);
+    internal delegate int Type_xrLocateHandJointsEXT(ulong tracker, in XrHandJointsLocateInfoEXT locateInfoEXT, ref XrHandJointLocationsEXT locations);
 
     /*XrResult xrWaitFrame(
         XrSession                                   session,
@@ -163,7 +175,7 @@ public class HandTrackingFeature : OpenXRFeature
     XrHandJointLocationEXT*    jointLocations;
 } XrHandJointLocationsEXT;*/
     [StructLayout(LayoutKind.Sequential)]
-    internal class XrHandJointLocationsEXT
+    internal struct XrHandJointLocationsEXT
     {
         public XrHandJointLocationsEXT(ref XrHandJointLocationEXT[] jointArray)
         {
@@ -221,7 +233,8 @@ public class HandTrackingFeature : OpenXRFeature
     protected override IntPtr HookGetInstanceProcAddr(IntPtr func)
     {
         mOldProc = (Type_xrGetInstanceProcAddr)Marshal.GetDelegateForFunctionPointer(xrGetInstanceProcAddr, typeof(Type_xrGetInstanceProcAddr));
-        return GetCallback<Type_xrGetInstanceProcAddr>(new Type_xrGetInstanceProcAddr(xrGetInstanceProcAddr_HOOK));
+
+        return GetCallback<Type_xrGetInstanceProcAddr>(new Type_xrGetInstanceProcAddr(xrGetInstanceProcAddr_HOOK_STATIC));
     }
 
 
@@ -246,6 +259,19 @@ public class HandTrackingFeature : OpenXRFeature
             return null;
         }
     }
+[MonoPInvokeCallback(typeof(Type_xrGetInstanceProcAddr))]
+    static int xrGetInstanceProcAddr_HOOK_STATIC(ulong instance, string name, out IntPtr function)
+    {
+        HandTrackingFeature hf= m_Singleton;
+        if(hf!=null)
+        {
+            return hf.xrGetInstanceProcAddr_HOOK(instance,name,out function);
+        }else
+        {
+            function=IntPtr.Zero;
+            return -1;
+        }
+    }
 
     int xrGetInstanceProcAddr_HOOK(ulong instance, string name, out IntPtr function)
     {
@@ -254,7 +280,7 @@ public class HandTrackingFeature : OpenXRFeature
             IntPtr fp;
             int retVal = mOldProc(instance, name, out fp);
             mOldWaitFrame = (Type_xrWaitFrame)Marshal.GetDelegateForFunctionPointer(fp, typeof(Type_xrWaitFrame));
-            function = GetCallback<Type_xrWaitFrame>(new Type_xrWaitFrame(xrWaitFrame_HOOK));
+            function = GetCallback<Type_xrWaitFrame>(new Type_xrWaitFrame(xrWaitFrame_HOOK_STATIC));
             return retVal;
         }
         else
@@ -262,6 +288,20 @@ public class HandTrackingFeature : OpenXRFeature
             return mOldProc(instance, name, out function);
         }
     }
+
+[MonoPInvokeCallback(typeof(Type_xrWaitFrame))]
+    static int xrWaitFrame_HOOK_STATIC(ulong session, in XrFrameWaitInfo waitInfo, ref XrFrameState state)
+    {
+        HandTrackingFeature hf= m_Singleton;
+        if(hf!=null)
+        {
+            return hf.xrWaitFrame_HOOK(session,waitInfo,ref state);
+        }else
+        {
+            return -1;
+        }
+    }
+
 
     int xrWaitFrame_HOOK(ulong session, in XrFrameWaitInfo waitInfo, ref XrFrameState state)
     {
@@ -355,11 +395,11 @@ public class HandTrackingFeature : OpenXRFeature
         {
             XrHandJointLocationEXT[] allJoints = new XrHandJointLocationEXT[26];
             XrHandJointsLocateInfoEXT jli = new XrHandJointsLocateInfoEXT(OpenXRFeature.GetCurrentAppSpace(), frame_time);
-            XrHandJointLocationsEXT joints = new(ref allJoints);
+            XrHandJointLocationsEXT joints = new XrHandJointLocationsEXT(ref allJoints);
             Type_xrLocateHandJointsEXT fp = GetInstanceProc<Type_xrLocateHandJointsEXT>("xrLocateHandJointsEXT");
             if (fp != null)
             {
-                int retVal = fp(handle, jli, joints);
+                int retVal = fp(handle, jli, ref joints);
                 joints.Unpin();
                 if (retVal == 0)
                 {
@@ -707,9 +747,6 @@ public class HandTrackingFeature : OpenXRFeature
             for (int c = 0; c < mesh.jointCountOutput; c++)
             {
                 bones[c] = new GameObject("Bone_" + c + bone_postfix);
-                GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                capsule.transform.localScale=new Vector3(1f,1f,1f);
-                capsule.transform.parent=bones[c].transform;
             }
             for(int c=0;c<mesh.jointCountOutput;c++)
             {
